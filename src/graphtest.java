@@ -6,34 +6,95 @@ class GraphTest {
     // (Für eigene Tests können beliebige weitere Testgraphen
     // hinzugefügt werden.)
     private static Graph [] graphs = {
+            new GraphImpl(new int[][]{
+                    {0, 1},
+                    {0, 2, 3},
+                    {1, 3},
+                    {1},
+                    {3, 5},
+                    {4, 5}
+            }),
+
+            new GraphImpl(new int[][]{
+            }),
+
             // Beispiel eines ungewichteten Graphen.
-            new GraphImpl(new int [] [] {
-                    { 1, 2 },	// Knoten 0 hat als Nachfolger Knoten 1 und 2.
-                    { },	// Knoten 1 hat keine Nachfolger.
-                    { 2 }	// Knoten 2 hat als Nachfolger sich selbst.
+            new GraphImpl(new int[][]{
+                    {1, 2},
+                    {},
+                    {2}
             }),
 
             // Beispiel eines gewichteten Graphen.
-            new WeightedGraphImpl(new int [] [] {
-                    { 1, 2 },	// Knoten 0 hat als Nachfolger Knoten 1 und 2.
-                    { },	// Knoten 1 hat keine Nachfolger.
-                    { 2 }	// Knoten 2 hat als Nachfolger sich selbst.
-            }, new double [] [] {
-                    { 1.5, 0 },	// Gewichte der Kanten (0, 1) und (0, 2).
-                    { },
-                    { -3.7 }	// Gewicht der Kante (2, 0).
+            new WeightedGraphImpl(new int[][]{
+                    {1, 2},
+                    {},
+                    {2}
+            }, new double[][]{
+                    {1.5, 0},
+                    {},
+                    {-3.7}
+            }),
+
+            // Beispiel eines gewichteten ungerichteten Graphen.
+            new WeightedGraphImpl(new int[][]{
+                    {1, 5, 4},
+                    {0, 2, 3, 4, 5},
+                    {1, 4, 3},
+                    {2, 1, 4},
+                    {3, 2, 1, 0, 5},
+                    {0, 1, 4}
+            }, new double[][]{
+                    {3, 5, 1},
+                    {3, 8, 7, 2, 5},
+                    {8, 7, 5},
+                    {5, 7, 8},
+                    {8, 7, 2, 1, 4},
+                    {5, 5, 4}
+            }),
+
+            new WeightedGraphImpl(new int[][]{
+                    {3},
+                    {0},
+                    {0, 1},
+                    {1, 2}
+            }, new double[][]{
+                    {4},
+                    {3},
+                    {6, 2},
+                    {5, 1}
             }),
 
             // Eine ungewöhnliche Implementierung des Graphen 0 <-> 1
             // ohne Verwendung von Adjazenzlisten.
-            new Graph () {
-                public int size () { return 2; }
-                public int deg (int v) { return 1; }
-                public int succ (int v, int i) { return 1 - v; }
-                public Graph transpose () { return this; }
-            }
-    };
+            new Graph() {
+                public int size() {
+                    return 2;
+                }
 
+                public int deg(int v) {
+                    return 1;
+                }
+
+                public int succ(int v, int i) {
+                    return 1 - v;
+                }
+
+                public Graph transpose() {
+                    return this;
+                }
+            },
+
+            new GraphImpl(new int[][]{
+                    {1, 3, 5},
+                    {},
+                    {3, 6},
+                    {4, 5},
+                    {0, 5},
+                    {1},
+                    {2, 4, 6}
+            })
+    };
     // name und value ausgeben.
     private static <T> void print (String name, T value) {
         System.out.print(" " + name + "=" + value);
@@ -86,20 +147,27 @@ class GraphTest {
                 }
                 break;
             case "dfs":
-            case "sort":
                 DFS dfs = new DFSImpl();
+                dfs.search(graph);
+                for (int v = 0; v < n; v++)
+                {
+                    print(v, "det", dfs.det(v), "fin", dfs.fin(v));
+                }
+                break;
+            case "sort":
+                DFS dfs2 = new DFSImpl();
                 if (algo.equals("dfs")) {
-                    dfs.search(graph);
+                    dfs2.search(graph);
                 }
                 else {
-                    if (!dfs.sort(graph)) {
+                    if (!dfs2.sort(graph)) {
                         System.out.println("cycle");
                         return;
                     }
                 }
                 for (int i = 0; i < n; i++) {
-                    int v = dfs.sequ(i);
-                    print(v, "det", dfs.det(v), "fin", dfs.fin(v));
+                    int v = dfs2.sequ(i);
+                    print(v, "det", dfs2.det(v), "fin", dfs2.fin(v));
                 }
                 break;
             case "scc":
