@@ -1,5 +1,13 @@
 public class WeightedGraphImpl implements WeightedGraph
 {
+    int[][] amatrix;
+    double[][] weights;
+    public WeightedGraphImpl(int[][] m, double[][] w)
+    {
+        amatrix = m;
+        weights = w;
+    }
+
     @Override
     public int size()
     {
