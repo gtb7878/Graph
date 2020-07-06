@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class GraphImpl implements  Graph
 {
-    private int[][] amatrix;
+
+
+    public  int[][] amatrix;
     public GraphImpl(int[][] m)
     {
         amatrix = m;
@@ -33,6 +38,24 @@ public class GraphImpl implements  Graph
     @Override
     public Graph transpose()
     {
-        return null;  // TODO
+
+        int[][] helpmatrix = new int[size()][size()];
+        int[] size = new int[size()];
+
+        for (int v = 0; v < size(); v++) {
+            int d = deg(v);
+            for (int i = 0; i < d; i++) {
+                int n = succ(v, i);
+               helpmatrix[n][size[n]] = v;
+                size[n]++;
+            }
+        }
+        int[][] invertmatrix = new int[size()][];
+        for (int v = 0; v < size(); v++) {
+            invertmatrix[v] = new int[size[v]];
+            if (size[v] >= 0) System.arraycopy(helpmatrix[v], 0, invertmatrix[v], 0, size[v]);
+        }
+
+        return new GraphImpl(invertmatrix);
     }
 }

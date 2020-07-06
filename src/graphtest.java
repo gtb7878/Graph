@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 // Testprogramm für Graphalgorithmen.
 class GraphTest {
@@ -141,10 +142,15 @@ class GraphTest {
         switch (algo) {
             case "bfs":
                 BFS bfs = new BFSImpl();
+
                 bfs.search(graph, s);
                 for (int v = 0; v < n; v++) {
                     print(v, "dist", bfs.dist(v), "pred", bfs.pred(v));
                 }
+                break;
+            case "trans":
+                graph.transpose();
+
                 break;
             case "dfs":
                 DFS dfs = new DFSImpl();
@@ -200,6 +206,7 @@ class GraphTest {
                     print(v, "dist", sp.dist(v), "pred", sp.pred(v));
                 }
                 break;
+
             default:
                 System.out.println("unknown algorithm: " + algo);
                 return;
