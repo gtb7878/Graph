@@ -1,24 +1,29 @@
 public class DFSImpl implements DFS
 {
 
-    int[] det, fin, pred;
+    int[] det, fin, pred, node, sfin;;// snode;
+    //int[] sdet, sfin, spred, snode;
     int time;
     String[] colour;
+    private boolean sequed;
 
     @Override
     public void search(Graph g)
     {
+        sequed = false;
         if (g == null) return;
 
         colour = new String[g.size()];
         det = new int[g.size()];
         fin = new int[g.size()];
         pred = new int[g.size()];
+        node = new int[g.size()];
 
 
         for (int i = 0; i < g.size(); i++)
         {
             colour[i] = "white";
+            node[i] = i;
         }
         time = 0;
         // 0
@@ -34,6 +39,10 @@ public class DFSImpl implements DFS
             }
 
         }
+
+
+
+
 
     }
 
@@ -64,11 +73,60 @@ public class DFSImpl implements DFS
     @Override
     public int sequ(int i)
     {
-        return 0;
+        // sortieren
+
+        //int[] ret = sort();
+        //return ret[i];
+
+        if (!sequed)
+        {
+            sfin = fin.clone();
+            return sort()[i];
+        }
+        return node[i];
+
+
+
+
+
+
+        //return i;
     }
 
 
     // Hilfsfunktionen
+
+
+    private int[] sort()
+    {
+        int tempfin, tempnode, tempdet, temppred;
+
+        for (int i = 0; i < node.length - 1; i++)
+        {
+            if (sfin[i] < sfin[i+1])
+            {
+                continue;
+            }
+            tempfin = sfin[i];
+            tempnode = node[i];
+            //tempdet = det[i];
+            //temppred = pred[i];
+            sfin[i] = sfin[i+1];
+            node[i] = node[i+1];
+            //det[i] = det[i+1];
+            //pred[i] = pred[i+1];
+            sfin[i+1] = tempfin;
+            node[i+1] = tempnode;
+            //det[i+1] = tempdet;
+            //pred[i+1] = temppred;
+            sort();
+
+
+
+        }
+        sequed = true;
+        return node;
+    }
 
     private void searchthrough(Graph g, int u)
     {

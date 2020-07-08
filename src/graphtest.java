@@ -152,28 +152,29 @@ class GraphTest {
                 graph.transpose();
 
                 break;
-            case "dfs":
-                DFS dfs = new DFSImpl();
-                dfs.search(graph);
+            case "dfssearch":
+                DFS dfs2 = new DFSImpl();
+                dfs2.search(graph);
                 for (int v = 0; v < n; v++)
                 {
-                    print(v, "det", dfs.det(v), "fin", dfs.fin(v));
+                    print(v, "det", dfs2.det(v), "fin", dfs2.fin(v));
                 }
                 break;
+            case "dfs":
             case "sort":
-                DFS dfs2 = new DFSImpl();
+                DFS dfs = new DFSImpl();
                 if (algo.equals("dfs")) {
-                    dfs2.search(graph);
+                    dfs.search(graph);
                 }
                 else {
-                    if (!dfs2.sort(graph)) {
+                    if (!dfs.sort(graph)) {
                         System.out.println("cycle");
                         return;
                     }
                 }
                 for (int i = 0; i < n; i++) {
-                    int v = dfs2.sequ(i);
-                    print(v, "det", dfs2.det(v), "fin", dfs2.fin(v));
+                    int v = dfs.sequ(i);
+                    print(v, "det", dfs.det(v), "fin", dfs.fin(v));
                 }
                 break;
             case "scc":

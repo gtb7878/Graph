@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class GraphImpl implements  Graph
 {
 
 
-    public  int[][] amatrix;
+    private  int[][] amatrix;
     public GraphImpl(int[][] m)
     {
         amatrix = m;
