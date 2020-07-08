@@ -150,7 +150,6 @@ class GraphTest {
                 break;
             case "trans":
                 graph.transpose();
-
                 break;
             case "dfssearch":
                 DFS dfs2 = new DFSImpl();
@@ -158,6 +157,16 @@ class GraphTest {
                 for (int v = 0; v < n; v++)
                 {
                     print(v, "det", dfs2.det(v), "fin", dfs2.fin(v));
+                }
+                break;
+            case "dfssearch2":
+                DFS dfs3 = new DFSImpl();
+                dfs3.search(graph);
+                DFS dfs4 = new DFSImpl();
+                dfs4.search(graph, dfs3);
+                for (int v = 0; v < n; v++)
+                {
+                    print(v, "det", dfs4.det(v), "fin", dfs4.fin(v));
                 }
                 break;
             case "dfs":

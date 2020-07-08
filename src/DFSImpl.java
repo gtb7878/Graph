@@ -1,6 +1,5 @@
 public class DFSImpl implements DFS
 {
-
     int[] det, fin, pred, node, sfin;;// snode;
     //int[] sdet, sfin, spred, snode;
     int time;
@@ -49,7 +48,36 @@ public class DFSImpl implements DFS
     @Override
     public void search(Graph g, DFS d)
     {
+        sequed = false;
+        if (g == null || d == null) return;
 
+        colour = new String[g.size()];
+        det = new int[g.size()];
+        fin = new int[g.size()];
+        pred = new int[g.size()];
+        node = new int[g.size()];
+
+
+        for (int i = 0; i < g.size(); i++)
+        {
+            colour[i] = "white";
+            node[i] = i;
+        }
+        time = 0;
+        // 0
+        for (int i = g.size()-1; i >= 0; i--)
+        {
+            int node = d.sequ(i);
+            if (colour[node].equals("white"))
+            {
+                // 1
+                pred[node] = -1;
+
+                // 2
+                searchthrough(g, node);
+            }
+
+        }
     }
 
     @Override

@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 public class GraphImpl implements  Graph
 {
 
 
-    private  int[][] amatrix;
+    private int[][] amatrix;
     public GraphImpl(int[][] m)
     {
         amatrix = m;
@@ -52,7 +54,9 @@ public class GraphImpl implements  Graph
             invertmatrix[v] = new int[size[v]];
             if (size[v] >= 0) System.arraycopy(helpmatrix[v], 0, invertmatrix[v], 0, size[v]);
         }
-
+        
         return new GraphImpl(invertmatrix);
     }
+
+
 }

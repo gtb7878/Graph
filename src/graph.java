@@ -29,6 +29,7 @@ interface Graph {
     // wie der aktuelle Graph, der für jede Kante (u, v) des aktuellen
     // Graphen die entgegengesetzte Kante (v, u) enthält.
     Graph transpose ();
+
 }
 
 // Gerichteter gewichteter Graph.
