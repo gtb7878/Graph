@@ -4,7 +4,7 @@ public class DFSImpl implements DFS
     //int[] sdet, sfin, spred, snode;
     int time;
     String[] colour;
-    private boolean sequed;
+    private boolean sequed, cycle;
 
     @Override
     public void search(Graph g)
@@ -83,7 +83,37 @@ public class DFSImpl implements DFS
     @Override
     public boolean sort(Graph g)
     {
-        return false;
+        sequed = false;
+        cycle = false;
+        if (g == null) return false;
+
+        colour = new String[g.size()];
+        det = new int[g.size()];
+        fin = new int[g.size()];
+        pred = new int[g.size()];
+        node = new int[g.size()];
+
+
+        for (int i = 0; i < g.size(); i++)
+        {
+            colour[i] = "white";
+            node[i] = i;
+        }
+        time = 0;
+        // 0
+        for (int i = 0; i < g.size(); i++)
+        {
+            if (colour[i].equals("white"))
+            {
+                // 1
+                pred[i] = -1;
+
+                // 2
+                searchthrough(g, i);
+            }
+
+        }
+        return !cycle;
     }
 
     @Override
@@ -158,6 +188,7 @@ public class DFSImpl implements DFS
 
     private void searchthrough(Graph g, int u)
     {
+
         time++;
         // 2.1
         if (time <= 2*g.size())
@@ -168,6 +199,9 @@ public class DFSImpl implements DFS
             // 2.2
             for (int i = 0; i < g.deg(u); i++)
             {
+                // check sort: cycle?
+                if (colour[g.succ(u, i)].equals("gray")) cycle = true;
+
                 if (colour[g.succ(u, i)].equals("white"))
                 {
                     // 2.2.1
@@ -189,4 +223,6 @@ public class DFSImpl implements DFS
 
         }
     }
+
+
 }

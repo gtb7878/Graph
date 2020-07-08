@@ -162,8 +162,9 @@ class GraphTest {
             case "dfssearch2":
                 DFS dfs3 = new DFSImpl();
                 dfs3.search(graph);
+                Graph graph2 = graph.transpose();
                 DFS dfs4 = new DFSImpl();
-                dfs4.search(graph, dfs3);
+                dfs4.search(graph2, dfs3);
                 for (int v = 0; v < n; v++)
                 {
                     print(v, "det", dfs4.det(v), "fin", dfs4.fin(v));
