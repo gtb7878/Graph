@@ -22,19 +22,25 @@ class GraphTest {
             // Beispiel eines ungewichteten Graphen.
             new GraphImpl(new int[][]{
                     {1, 2},
-                    {},
+                    {0},
                     {2}
+            }),
+
+            new GraphImpl(new int[][]{
+                    {1},
+                    {0},
+                    {0,2}
             }),
 
             // Beispiel eines gewichteten Graphen.
             new WeightedGraphImpl(new int[][]{
                     {1, 2},
                     {},
-                    {2}
+                    {2,1}
             }, new double[][]{
-                    {1.5, 0},
+                    {5, 3},
                     {},
-                    {-3.7}
+                    {9,1}
             }),
 
             // Beispiel eines gewichteten ungerichteten Graphen.

@@ -1,6 +1,6 @@
 public class DFSImpl implements DFS
 {
-    int[] det, fin, pred, node, sfin;;// snode;
+    int[] det, fin, pred, node, sfin;// snode;
     //int[] sdet, sfin, spred, snode;
     int time;
     String[] colour;
@@ -42,7 +42,8 @@ public class DFSImpl implements DFS
 
 
 
-
+        System.out.println(java.util.Arrays.toString(det));
+        System.out.println(java.util.Arrays.toString(fin));
     }
 
     @Override
@@ -78,6 +79,8 @@ public class DFSImpl implements DFS
             }
 
         }
+        System.out.println(java.util.Arrays.toString(det));
+        System.out.println(java.util.Arrays.toString(fin));
     }
 
     @Override
