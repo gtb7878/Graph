@@ -39,11 +39,6 @@ public class DFSImpl implements DFS
 
         }
 
-
-
-
-        System.out.println(java.util.Arrays.toString(det));
-        System.out.println(java.util.Arrays.toString(fin));
     }
 
     @Override
@@ -79,8 +74,6 @@ public class DFSImpl implements DFS
             }
 
         }
-        System.out.println(java.util.Arrays.toString(det));
-        System.out.println(java.util.Arrays.toString(fin));
     }
 
     @Override

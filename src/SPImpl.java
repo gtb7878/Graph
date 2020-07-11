@@ -6,6 +6,8 @@ public class SPImpl implements SP
     @Override
     public boolean bellmanFord(WeightedGraph g, int s)
     {
+        if (g == null || s < 0 || s >= g.size()) return false;
+
         pred = new int[g.size()];
         dist = new double[g.size()];
 
@@ -38,6 +40,8 @@ public class SPImpl implements SP
     @Override
     public void dijkstra(WeightedGraph g, int s)
     {
+        if (g == null || s < 0 || s >= g.size()) return;
+
         BinHeap<Double, Integer> n = new BinHeap<>();
         BinHeap.Entry<Double, Integer>[] e = new BinHeap.Entry[g.size()];
 

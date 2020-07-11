@@ -6,6 +6,8 @@ public class SCCImpl implements SCC
     @Override
     public void compute(Graph g)
     {
+        if (g == null) return;
+
         speicher = new int[g.size()];
         sort = new int[g.size()];
         DFS dfs1 = new DFSImpl();
