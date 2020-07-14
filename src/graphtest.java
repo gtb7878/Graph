@@ -36,27 +36,27 @@ class GraphTest {
             new WeightedGraphImpl(new int[][]{
                     {1, 2},
                     {},
-                    {2,1}
+                    {1, 2}
             }, new double[][]{
                     {5, 3},
                     {},
-                    {9,1}
+                    {1, 9}
             }),
 
             // Beispiel eines gewichteten ungerichteten Graphen.
             new WeightedGraphImpl(new int[][]{
-                    {1, 5, 4},
+                    {1, 4, 5},
                     {0, 2, 3, 4, 5},
-                    {1, 4, 3},
-                    {2, 1, 4},
-                    {3, 2, 1, 0, 5},
+                    {1, 3, 4},
+                    {1, 2, 4},
+                    {0, 1, 2, 3, 5},
                     {0, 1, 4}
             }, new double[][]{
-                    {3, 5, 1},
+                    {3, 1, 5},
                     {3, 8, 7, 2, 5},
-                    {8, 7, 5},
-                    {5, 7, 8},
-                    {8, 7, 2, 1, 4},
+                    {8, 5, 7},
+                    {7, 5, 8},
+                    {1, 2, 7, 8, 4},
                     {5, 5, 4}
             }),
 
