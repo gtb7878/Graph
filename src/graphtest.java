@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 // Testprogramm für Graphalgorithmen.
 class GraphTest {
@@ -7,101 +6,34 @@ class GraphTest {
     // (Für eigene Tests können beliebige weitere Testgraphen
     // hinzugefügt werden.)
     private static Graph [] graphs = {
-            new GraphImpl(new int[][]{
-                    {0, 1},
-                    {0, 2, 3},
-                    {1, 3},
-                    {1},
-                    {3, 5},
-                    {4, 5}
-            }),
-
-            new GraphImpl(new int[][]{
-            }),
-
             // Beispiel eines ungewichteten Graphen.
-            new GraphImpl(new int[][]{
-                    {1, 2},
-                    {0},
-                    {2}
-            }),
-
-            new GraphImpl(new int[][]{
-                    {1},
-                    {0},
-                    {0,2}
+            new GraphImpl(new int [] [] {
+                    { 1, 2 },	// Knoten 0 hat als Nachfolger Knoten 1 und 2.
+                    { },	// Knoten 1 hat keine Nachfolger.
+                    { 2 }	// Knoten 2 hat als Nachfolger sich selbst.
             }),
 
             // Beispiel eines gewichteten Graphen.
-            new WeightedGraphImpl(new int[][]{
-                    {1, 2},
-                    {},
-                    {1, 2}
-            }, new double[][]{
-                    {5, 3},
-                    {},
-                    {1, 9}
-            }),
-
-            // Beispiel eines gewichteten ungerichteten Graphen.
-            new WeightedGraphImpl(new int[][]{
-                    {1, 4, 5},
-                    {0, 2, 3, 4, 5},
-                    {1, 3, 4},
-                    {1, 2, 4},
-                    {0, 1, 2, 3, 5},
-                    {0, 1, 4}
-            }, new double[][]{
-                    {3, 1, 5},
-                    {3, 8, 7, 2, 5},
-                    {8, 5, 7},
-                    {7, 5, 8},
-                    {1, 2, 7, 8, 4},
-                    {5, 5, 4}
-            }),
-
-            new WeightedGraphImpl(new int[][]{
-                    {3},
-                    {0},
-                    {0, 1},
-                    {1, 2}
-            }, new double[][]{
-                    {4},
-                    {3},
-                    {6, 2},
-                    {5, 1}
+            new WeightedGraphImpl(new int [] [] {
+                    { 1, 2 },	// Knoten 0 hat als Nachfolger Knoten 1 und 2.
+                    { },	// Knoten 1 hat keine Nachfolger.
+                    { 2 }	// Knoten 2 hat als Nachfolger sich selbst.
+            }, new double [] [] {
+                    { 1.5, 0 },	// Gewichte der Kanten (0, 1) und (0, 2).
+                    { },
+                    { -3.7 }	// Gewicht der Kante (2, 0).
             }),
 
             // Eine ungewöhnliche Implementierung des Graphen 0 <-> 1
             // ohne Verwendung von Adjazenzlisten.
-            new Graph() {
-                public int size() {
-                    return 2;
-                }
-
-                public int deg(int v) {
-                    return 1;
-                }
-
-                public int succ(int v, int i) {
-                    return 1 - v;
-                }
-
-                public Graph transpose() {
-                    return this;
-                }
-            },
-
-            new GraphImpl(new int[][]{
-                    {1, 3, 5},
-                    {},
-                    {3, 6},
-                    {4, 5},
-                    {0, 5},
-                    {1},
-                    {2, 4, 6}
-            })
+            new Graph () {
+                public int size () { return 2; }
+                public int deg (int v) { return 1; }
+                public int succ (int v, int i) { return 1 - v; }
+                public Graph transpose () { return this; }
+            }
     };
+
     // name und value ausgeben.
     private static <T> void print (String name, T value) {
         System.out.print(" " + name + "=" + value);
@@ -148,32 +80,9 @@ class GraphTest {
         switch (algo) {
             case "bfs":
                 BFS bfs = new BFSImpl();
-
                 bfs.search(graph, s);
                 for (int v = 0; v < n; v++) {
                     print(v, "dist", bfs.dist(v), "pred", bfs.pred(v));
-                }
-                break;
-            case "trans":
-                graph.transpose();
-                break;
-            case "dfssearch":
-                DFS dfs2 = new DFSImpl();
-                dfs2.search(graph);
-                for (int v = 0; v < n; v++)
-                {
-                    print(v, "det", dfs2.det(v), "fin", dfs2.fin(v));
-                }
-                break;
-            case "dfssearch2":
-                DFS dfs3 = new DFSImpl();
-                dfs3.search(graph);
-                Graph graph2 = graph.transpose();
-                DFS dfs4 = new DFSImpl();
-                dfs4.search(graph2, dfs3);
-                for (int v = 0; v < n; v++)
-                {
-                    print(v, "det", dfs4.det(v), "fin", dfs4.fin(v));
                 }
                 break;
             case "dfs":
@@ -223,7 +132,6 @@ class GraphTest {
                     print(v, "dist", sp.dist(v), "pred", sp.pred(v));
                 }
                 break;
-
             default:
                 System.out.println("unknown algorithm: " + algo);
                 return;

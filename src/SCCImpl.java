@@ -3,6 +3,7 @@ public class SCCImpl implements SCC
 
     int[] speicher, sort;
 
+    // siehe Folie 146
     @Override
     public void compute(Graph g)
     {
